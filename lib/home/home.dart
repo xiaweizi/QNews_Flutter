@@ -22,19 +22,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     _navigationViews = <NavigationIconView>[
       new NavigationIconView(
         icon: new Icon(Icons.assignment),
-        title: new Text('news'),
+        title: new Text('新闻'),
       ),
       new NavigationIconView(
-        icon: new Icon(Icons.assignment),
-        title: new Text('news'),
+        icon: new Icon(Icons.insert_emoticon),
+        title: new Text('段子'),
       ),
       new NavigationIconView(
-        icon: new Icon(Icons.assignment),
-        title: new Text('news'),
+        icon: new Icon(Icons.today),
+        title: new Text('历史今天'),
       ),
       new NavigationIconView(
-        icon: new Icon(Icons.assignment),
-        title: new Text('news'),
+        icon: new Icon(Icons.face),
+        title: new Text('小爱'),
       ),
 
     ];
