@@ -20,25 +20,12 @@ class _NewsState extends State<News> {
     '4',
     '1',
     '2',
-    '3',
-    '4',
-    '1',
-    '2',
-    '3',
-    '4',
-    '1',
-    '2',
-    '3',
-    '4',
-    '1',
-    '2',
-    '3',
-    '4',
   ];
 
   @override
   void initState() {
     // TODO: implement initState
+    print('_NewsState.initState, ');
     super.initState();
   }
 
@@ -46,7 +33,7 @@ class _NewsState extends State<News> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('News'),
+        title: new Text('News', style: new TextStyle(color: Colors.white)),
       ),
       body: new RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -74,8 +61,20 @@ class _NewsState extends State<News> {
   }
 
   Future<Null> _handleRefresh() async {
-    _getData();
-    return null;
+    final Completer<Null> completer = new Completer<Null>();
+
+    // 启动一下 [Timer] 在3秒后，在list里面添加一条数据，关完成这个刷新
+    new Timer(Duration(seconds: 3), () {
+      // 添加数据，更新界面
+      setState(() {
+        data.add('dd');
+      });
+
+      // 完成刷新
+      completer.complete(null);
+    });
+
+    return completer.future;
   }
 
   void _getData() async {

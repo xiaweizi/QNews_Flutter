@@ -10,7 +10,7 @@ class _RobotState extends State<Robot> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Robot'),
+        title: new Text('Robot', style: new TextStyle(color: Colors.white)),
       ),
       body: new Center(
         child: new Text('Robot'),

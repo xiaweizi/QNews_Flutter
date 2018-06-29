@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'NavigationIconView.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:qnews/news/news.dart';
 import 'package:qnews/joker/joker.dart';
 import 'package:qnews/robot/robot.dart';
@@ -11,70 +11,41 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-
   int _currentIndex = 0;
-  List<NavigationIconView> _navigationViews;
-  List<StatefulWidget> _pages;
-  StatefulWidget _currentPage;
-  @override
-  void initState() {
-    super.initState();
-    _navigationViews = <NavigationIconView>[
-      new NavigationIconView(
-        icon: new Icon(Icons.assignment),
-        title: new Text('新闻'),
-      ),
-      new NavigationIconView(
-        icon: new Icon(Icons.insert_emoticon),
-        title: new Text('段子'),
-      ),
-      new NavigationIconView(
-        icon: new Icon(Icons.today),
-        title: new Text('历史今天'),
-      ),
-      new NavigationIconView(
-        icon: new Icon(Icons.face),
-        title: new Text('小爱'),
-      ),
-
-    ];
-
-    _pages = <StatefulWidget>[
-      new News(),
-      new Joker(),
-      new Today(),
-      new Robot(),
-    ];
-    _currentPage = _pages[_currentIndex];
-  }
-
 
   @override
   Widget build(BuildContext context) {
-    final BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(
-      items: _navigationViews.map((view) => view.item).toList(),
-      currentIndex: _currentIndex,
-      fixedColor: Colors.blue,
-      type: BottomNavigationBarType.fixed,
-      onTap: (int index) {
-        print("index: $index");
-        setState(() {
-//          _navigationViews[_currentIndex].controller.reverse();
-          _currentIndex = index;
-//          _navigationViews[_currentIndex].controller.forward();
-          _currentPage = _pages[_currentIndex];
-        });
-      },
-    );
     return new MaterialApp(
+      theme: new ThemeData(primaryColor: Colors.lightBlueAccent),
       home: new Scaffold(
-        body: new Center(
-          child: _currentPage,
+        body: new IndexedStack(
+          children: <Widget>[
+            new News(),
+            new Joker(),
+            new Today(),
+            new Robot(),
+          ],
+          index: _currentIndex,
         ),
-        bottomNavigationBar: bottomNavigationBar,
-      ),
-      theme: new ThemeData(
-        primaryColor: Colors.blue,
+        bottomNavigationBar: new CupertinoTabBar(
+          items: <BottomNavigationBarItem>[
+            new BottomNavigationBarItem(
+                icon: new Icon(Icons.assignment), title: new Text('新闻')),
+            new BottomNavigationBarItem(
+                icon: new Icon(Icons.insert_emoticon), title: new Text('段子')),
+            new BottomNavigationBarItem(
+                icon: new Icon(Icons.today), title: new Text(' 历史今天')),
+            new BottomNavigationBarItem(
+                icon: new Icon(Icons.face), title: new Text('小爱')),
+          ],
+          currentIndex: _currentIndex,
+          activeColor: Colors.lightBlueAccent,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }

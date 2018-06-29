@@ -10,7 +10,7 @@ class _TodayState extends State<Today> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Today'),
+        title: new Text('Today', style: new TextStyle(color: Colors.white)),
       ),
       body: new Center(
         child: new Text('Today'),
